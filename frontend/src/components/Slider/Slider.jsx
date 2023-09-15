@@ -1,42 +1,21 @@
-import { useEffect, useState } from "react";
-import axios from "axios";
-
 import { Carousel } from "flowbite-react";
+import PropTypes from "prop-types";
 
 import "./Slider.css";
 
-const Slider = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-  const [games, setGames] = useState([]);
-
-  useEffect(() => {
-    const getGames = async () => {
-      try {
-        const response = await axios.get(
-          `https://api.rawg.io/api/games?key=${
-            import.meta.env.VITE_API_KEY
-          }&page=5&page_size=4`
-        );
-        setGames(response.data.results);
-      } catch (err) {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
-    };
-    getGames();
-    return setGames([]), setError(false);
-  }, []);
-
+const Slider = ({ loading, error, games }) => {
+  const renderedItems = games.slice(0, 4);
   return (
     <Carousel className="mx-auto h-[500px] w-[800px]">
       {loading || error ? (
-        <img src="https://placehold.co/600x400" alt="" />
+        <img
+          src="https://placehold.co/600x400"
+          alt="Wait for a moment or try again"
+        />
       ) : (
-        games.map((game) => (
-          <div key={game.id}>
-            <h2 className="font text-2xl p-2 font-semibold tracking-wide text-center text-slate-200">
+        renderedItems.map((game) => (
+          <div key={game.id} className="mt-2">
+            <h2 className="font text-xl p-2 font-semibold tracking-wide text-center text-slate-200">
               {game.name}
             </h2>
             <img src={game.background_image} alt={game.name} />
@@ -45,6 +24,12 @@ const Slider = () => {
       )}
     </Carousel>
   );
+};
+
+Slider.propTypes = {
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  games: PropTypes.array,
 };
 
 export default Slider;
