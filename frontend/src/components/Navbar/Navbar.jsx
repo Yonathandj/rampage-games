@@ -5,7 +5,7 @@ import "./Navbar.css";
 
 const Navbar = () => {
   return (
-    <nav className="font flex items-center justify-between px-8 py-2 shadow-lg bg-zinc-800">
+    <nav className="font fixed w-full z-10 flex items-center justify-between px-8 py-2 shadow-lg bg-zinc-800">
       <section className="flex items-center gap-20">
         <section className="flex items-center gap-4 text-slate-200">
           <Link to="/" className="hover:text-slate-300">

@@ -30,13 +30,14 @@ const Discover = () => {
     }, 500);
     return () => {
       setGames([]);
+      setLoading(true);
       setError(false);
       clearTimeout(timeForLoading);
     };
   }, []);
 
   return (
-    <div className="p-10 bg-zinc-900">
+    <div className="p-10 bg-zinc-950">
       <Slider loading={loading} error={error} games={games} />
       <Recommendation loading={loading} error={error} games={games} />
     </div>

@@ -6,7 +6,7 @@ import "./Slider.css";
 const Slider = ({ loading, error, games }) => {
   const renderedItems = games.slice(0, 4);
   return (
-    <Carousel className="mx-auto h-[500px] w-[800px]">
+    <Carousel className="mt-10 mx-auto h-[500px] w-[800px]">
       {loading || error ? (
         <img
           src="https://placehold.co/600x400"
