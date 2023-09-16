@@ -46,7 +46,7 @@ const Shop = () => {
 
   return (
     <div className="font h-full bg-zinc-950 py-16 px-32">
-      <h2 className="mt-20 mb-10 text-center text-4xl font-semibold text-slate-200">
+      <h2 className="mt-5 mb-2 text-center text-4xl font-semibold text-slate-200">
         List of Games
       </h2>
       <ShopItem loading={loading} error={error} games={gamesToRender} />
