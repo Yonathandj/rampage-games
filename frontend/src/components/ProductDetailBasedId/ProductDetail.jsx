@@ -14,11 +14,11 @@ const ProductDetail = () => {
     const getGame = async () => {
       try {
         const response = await axios.get(
-          `https://api.rawg.io/api/games?key=${
+          `https://api.rawg.io/api/games/${id}?key=${
             import.meta.env.VITE_API_KEY
-          }&search=${id}`
+          }`
         );
-        setGame(response.data.results);
+        setGame([response.data]);
       } catch (err) {
         setError(true);
       } finally {
@@ -28,7 +28,7 @@ const ProductDetail = () => {
 
     const timeForLoading = setTimeout(() => {
       getGame();
-    }, 500);
+    }, 1000);
 
     return () => {
       setLoading(true);
@@ -38,7 +38,7 @@ const ProductDetail = () => {
   }, [id]);
 
   return (
-    <div className="h-screen bg-zinc-950">
+    <div className="h-full bg-zinc-950">
       <div className="p-20">
         <ProductDetailItem loading={loading} error={error} game={game} />
       </div>

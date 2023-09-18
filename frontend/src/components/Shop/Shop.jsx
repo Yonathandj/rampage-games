@@ -27,7 +27,7 @@ const Shop = () => {
         setGames(response.data.results);
       } catch (err) {
         setError(true);
-        console.log(err);
+        console.log(err.message);
       } finally {
         setLoading(false);
         setShowPagination(true);
@@ -45,8 +45,12 @@ const Shop = () => {
   }, [currentPage]);
 
   return (
-    <div className="font h-full bg-zinc-950 py-16 px-32">
-      <h2 className="mt-5 mb-2 text-center text-4xl font-semibold text-slate-200">
+    <div
+      className={`font ${
+        loading ? "h-screen" : "h-full"
+      } bg-zinc-950 pt-16 px-32`}
+    >
+      <h2 className="mt-6 mb-4 text-center text-4xl font-semibold text-slate-200">
         List of Games
       </h2>
       <ShopItem loading={loading} error={error} games={gamesToRender} />
@@ -62,7 +66,7 @@ const Shop = () => {
       )}
       {showPagination && (
         <Pagination
-          className="mt-4"
+          className="mt-4 pb-2"
           currentPage={currentPage}
           onPageChange={(page) => {
             setRenderedGames(4);

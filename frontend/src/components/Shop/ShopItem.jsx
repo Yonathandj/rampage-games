@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { FaStar } from "react-icons/fa";
 
+import { Link } from "react-router-dom";
+
 import { Card } from "flowbite-react";
 import ShopSkeleton from "./ShopSkeleton";
 
@@ -12,11 +14,11 @@ const ShopItem = ({ loading, error, games }) => {
       ) : (
         games.map((game) => (
           <Card key={game.id} imgAlt={game.name} imgSrc={game.background_image}>
-            <a href="#">
+            <Link to={`${game.id}`}>
               <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                 <p>{game.name}</p>
               </h5>
-            </a>
+            </Link>
             <div className="mb-5 mt-2.5 flex items-center">
               <FaStar size={25} className="text-yellow-600" />
               <span className="ml-3 mr-2 rounded bg-cyan-100 px-2.5 py-0.5 text-xs font-semibold text-cyan-800 dark:bg-cyan-200 dark:text-cyan-800">

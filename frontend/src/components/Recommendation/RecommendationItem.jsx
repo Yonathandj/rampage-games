@@ -14,7 +14,8 @@ const RecommendationItem = ({ loading, error, games }) => {
         ) : (
           games.map((game) => (
             <div key={game.id} className="font w-52 h-96 p-4">
-              <Link to={`games/:${game.id}`}>
+              <Link to={`games/${game.id}`}>
+                
                 <img
                   src={game.background_image}
                   alt={game.name}
