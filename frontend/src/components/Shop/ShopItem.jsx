@@ -1,12 +1,28 @@
 import PropTypes from "prop-types";
 import { FaStar } from "react-icons/fa";
 
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
-import { Card } from "flowbite-react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import { Button, Card } from "flowbite-react";
 import ShopSkeleton from "./ShopSkeleton";
 
 const ShopItem = ({ loading, error, games }) => {
+  const [cart, setCart] = useOutletContext();
+
+  function handleAddToCart(game) {
+    cart.filter((data) => data.id === game.id).length > 0
+      ? console.log("already added")
+      : setCart([...cart, game]);
+  }
+  const showSuccessToast = () => {
+    toast.success("Success added to cart !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
   return (
     <div className="grid grid-cols-4 gap-4">
       {loading || error ? (
@@ -29,12 +45,15 @@ const ShopItem = ({ loading, error, games }) => {
               <span className="text-3xl font-bold text-gray-900 dark:text-white">
                 $599
               </span>
-              <a
-                className="rounded-lg bg-cyan-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
-                href="#"
+              <Button
+                onClick={() => {
+                  handleAddToCart(game);
+                  showSuccessToast();
+                }}
               >
-                <p>Add to cart</p>
-              </a>
+                Add to Chart
+              </Button>
+              <ToastContainer />
             </div>
           </Card>
         ))

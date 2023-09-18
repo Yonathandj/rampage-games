@@ -1,11 +1,29 @@
 import PropTypes from "prop-types";
+import { useOutletContext } from "react-router-dom";
 
 import { Button } from "flowbite-react";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import "./ProductDetail.css";
 import ProductDetailSkeleton from "./ProductDetailSkeleton";
 
 const ProductDetailItem = ({ loading, error, game }) => {
+  const [cart, setCart] = useOutletContext();
+
+  function handleAddToCart(game) {
+    cart.filter((data) => data.id === game.id).length > 0
+      ? console.log("already added")
+      : setCart([...cart, game]);
+  }
+
+  const showSuccessToast = () => {
+    toast.success("Success added to cart !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
   return (
     <div className="font px-40 py-6">
       {loading || error ? (
@@ -62,12 +80,22 @@ const ProductDetailItem = ({ loading, error, game }) => {
                 ))}
               </p>
             </section>
+            <section className="flex justify-end">
+              {loading === false && (
+                <Button
+                  onClick={() => {
+                    handleAddToCart(x);
+                    showSuccessToast();
+                  }}
+                >
+                  Add to Chart
+                </Button>
+              )}
+              <ToastContainer />
+            </section>
           </div>
         ))
       )}
-      <section className="flex justify-end">
-        {loading === false && <Button>Add to Chart</Button>}
-      </section>
     </div>
   );
 };

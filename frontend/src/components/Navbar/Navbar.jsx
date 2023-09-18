@@ -1,9 +1,10 @@
 import { FaPaw, FaCartArrowDown } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { PropTypes } from "prop-types";
 
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = ({ cart }) => {
   return (
     <nav className="font fixed w-full z-10 flex items-center justify-between px-8 py-2 shadow-lg bg-zinc-800">
       <section className="flex items-center gap-20">
@@ -29,6 +30,11 @@ const Navbar = () => {
         </section>
       </section>
       <section>
+        {cart.length > 0 && (
+          <span className="text-base relative top-2 left-7 p-1 rounded-2xl text-slate-200 bg-emerald-600">
+            {cart.length}
+          </span>
+        )}
         <Link to="cart">
           {" "}
           <FaCartArrowDown
@@ -39,6 +45,10 @@ const Navbar = () => {
       </section>
     </nav>
   );
+};
+
+Navbar.propTypes = {
+  cart: PropTypes.array,
 };
 
 export default Navbar;
