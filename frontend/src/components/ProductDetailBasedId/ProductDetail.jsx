@@ -38,7 +38,7 @@ const ProductDetail = () => {
   }, [id]);
 
   return (
-    <div className="h-full bg-zinc-950">
+    <div className={`${loading ? "h-screen" : "h-full"} bg-zinc-950`}>
       <div className="p-20">
         <ProductDetailItem loading={loading} error={error} game={game} />
       </div>
