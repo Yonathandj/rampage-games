@@ -4,7 +4,6 @@ import { useState } from "react";
 
 const Container = () => {
   const [cart, setCart] = useState([]);
-  console.log(cart);
   return (
     <div>
       <Navbar cart={cart} />

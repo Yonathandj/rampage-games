@@ -53,11 +53,11 @@ const ShopItem = ({ loading, error, games }) => {
             </div>
             <div className="flex items-center justify-between">
               <span className="text-3xl font-bold text-gray-900 dark:text-white">
-                $599
+                ${game.suggestions_count}
               </span>
               <Button
                 onClick={() => {
-                  const toast= handleAddToCart(game);
+                  const toast = handleAddToCart(game);
                   toast();
                 }}
               >
