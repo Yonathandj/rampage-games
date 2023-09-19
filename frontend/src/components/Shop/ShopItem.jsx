@@ -12,16 +12,26 @@ import ShopSkeleton from "./ShopSkeleton";
 const ShopItem = ({ loading, error, games }) => {
   const [cart, setCart] = useOutletContext();
 
-  function handleAddToCart(game) {
-    cart.filter((data) => data.id === game.id).length > 0
-      ? console.log("already added")
-      : setCart([...cart, game]);
-  }
   const showSuccessToast = () => {
     toast.success("Success added to cart !", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
+  const showAlreadyToast = () => {
+    toast.info("Already added to cart !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  function handleAddToCart(game) {
+    if (cart.filter((data) => data.id === game.id).length > 0) {
+      return showAlreadyToast;
+    }
+    if (cart.filter((data) => data.id === game.id).length === 0) {
+      setCart([...cart, game]);
+      return showSuccessToast;
+    }
+  }
 
   return (
     <div className="grid grid-cols-4 gap-4">
@@ -47,8 +57,8 @@ const ShopItem = ({ loading, error, games }) => {
               </span>
               <Button
                 onClick={() => {
-                  handleAddToCart(game);
-                  showSuccessToast();
+                  const toast= handleAddToCart(game);
+                  toast();
                 }}
               >
                 Add to Chart

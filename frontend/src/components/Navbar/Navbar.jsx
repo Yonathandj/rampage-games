@@ -31,7 +31,7 @@ const Navbar = ({ cart }) => {
       </section>
       <section>
         {cart.length > 0 && (
-          <span className="text-base relative top-2 left-7 p-1 rounded-2xl text-slate-200 bg-emerald-600">
+          <span className="text-base relative top-2 left-7 p-1 rounded-2xl text-slate-200 bg-sky-600">
             {cart.length}
           </span>
         )}

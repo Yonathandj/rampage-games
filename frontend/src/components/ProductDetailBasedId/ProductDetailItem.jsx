@@ -12,17 +12,26 @@ import ProductDetailSkeleton from "./ProductDetailSkeleton";
 const ProductDetailItem = ({ loading, error, game }) => {
   const [cart, setCart] = useOutletContext();
 
-  function handleAddToCart(game) {
-    cart.filter((data) => data.id === game.id).length > 0
-      ? console.log("already added")
-      : setCart([...cart, game]);
-  }
-
   const showSuccessToast = () => {
     toast.success("Success added to cart !", {
       position: toast.POSITION.TOP_RIGHT,
     });
   };
+  const showAlreadyToast = () => {
+    toast.info("Already added to cart !", {
+      position: toast.POSITION.TOP_RIGHT,
+    });
+  };
+
+  function handleAddToCart(game) {
+    if (cart.filter((data) => data.id === game.id).length > 0) {
+      return showAlreadyToast;
+    }
+    if (cart.filter((data) => data.id === game.id).length === 0) {
+      setCart([...cart, game]);
+      return showSuccessToast;
+    }
+  }
 
   return (
     <div className="font px-40 py-6">
@@ -84,8 +93,8 @@ const ProductDetailItem = ({ loading, error, game }) => {
               {loading === false && (
                 <Button
                   onClick={() => {
-                    handleAddToCart(x);
-                    showSuccessToast();
+                    const toast = handleAddToCart(x);
+                    toast();
                   }}
                 >
                   Add to Chart
