@@ -88,7 +88,7 @@ const Navbar = ({ cart }) => {
                   width={100}
                   height={50}
                 />
-                <h2 className="text-base font-medium tracking-wide text-slate-200">
+                <h2 className="text-sm sm:text-base font-medium tracking-wide text-slate-200">
                   {x.name}
                 </h2>
               </section>

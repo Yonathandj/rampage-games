@@ -6,6 +6,10 @@ import { Button } from "flowbite-react";
 const Cart = () => {
   const [cart, setCart] = useOutletContext();
 
+  const totalPrice = cart.reduce((acc, game) => {
+    return acc + parseInt(game.suggestions_count);
+  }, 0);
+
   function handleDeleteFromCart(id) {
     setCart(cart.filter((games) => games.id !== id));
   }
@@ -39,6 +43,9 @@ const Cart = () => {
             </section>
           </section>
         ))}
+        <h2 className="text-4xl font-medium text-slate-200">
+          Total Price: {totalPrice}
+        </h2>
       </div>
     </div>
   );

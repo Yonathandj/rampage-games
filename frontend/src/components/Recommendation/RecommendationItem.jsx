@@ -7,15 +7,14 @@ import RecommendationSkeleton from "./RecommendationSkeleton";
 
 const RecommendationItem = ({ loading, error, games }) => {
   return (
-    <div className="mx-auto w-3/4 pt-2">
-      <section className="grid grid-cols-4 gap-y-4">
+    <div className="w-full">
+      <section className="grid grid-cols-1 place-items-center sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
         {loading || error ? (
           <RecommendationSkeleton />
         ) : (
           games.map((game) => (
-            <div key={game.id} className="font w-52 h-96 p-4">
+            <div key={game.id} className="font w-52 h-96">
               <Link to={`games/${game.id}`}>
-                
                 <img
                   src={game.background_image}
                   alt={game.name}

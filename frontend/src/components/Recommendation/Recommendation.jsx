@@ -6,8 +6,8 @@ import "./Recommendation.css";
 const Recommendation = ({ loading, error, games }) => {
   const renderendItems = games.slice(4);
   return (
-    <div className="py-8 px-24">
-      <section className="font text-center">
+    <div className="py-8 md:px-10 lg:px-24">
+      <section className="font text-center mb-4">
         <h2 className="text-lg font-medium text-slate-200">
           Recommendation Games
         </h2>
